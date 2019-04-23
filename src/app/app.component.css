@@ -1,0 +1,25 @@
+.find-search-icon {
+    background-image: url('/assets/images/magnifying-glass-gray.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 25px;
+    background-color: #fff;
+    position: relative;
+    cursor: pointer;
+    /* height: 18px;
+    padding: 10px;
+    float: right;
+    bottom: 27px;
+    right: 10px; */
+}
+
+.detail-view {
+    position: absolute;
+    left: 16%;
+}
+
+.profile-view {
+    float: left;
+    position: relative;
+    right: 25%;
+}

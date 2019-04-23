@@ -1,0 +1,84 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar navbar-light bg-primary">
+  <div class="container">
+    <form class="form-inline">
+      <div class="input-group">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Sort
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item" type="button">Action</button>
+            <button class="dropdown-item" type="button">Another action</button>
+            <button class="dropdown-item" type="button">Something else here</button>
+          </div>
+        </div>
+      </div>
+      <div class="input-group search-input">
+        <input type="text" class="form-control" placeholder="Search" aria-label="search" aria-describedby="basic-addon1"
+          name="search_string" [(ngModel)]="search_string">
+        <span class="find-search-icon" (click)="getData()"></span>
+      </div>
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+    <div class="m-3">
+      <!-- <h1>Hello</h1> -->
+      <div class="total-result">
+        Total Results: {{ allData.total_count ? allData.total_count : 0 }}
+      </div>
+      <div class="card bg-light data-list-view" *ngFor="let item of pagedItems; let i = index">
+        <div class="card-body text-center" data-toggle="collapse" href="#collapseExample" (click)="openList(i, item)">
+          <div class="profile-view">
+            <img src="{{ item.avatar_url }}" class="rounded-circle" alt="Cinque Terre" width="15%" height="15%">
+          </div>
+          <div class="detail-view">
+            <h4 class="card-text">{{ item.login }}</h4>
+            Profile URL: <span>{{ item.html_url }}</span>
+          </div>
+        </div>
+        <div class="collapse" id="collapseExample" *ngIf="selectedIndex === i ? true : false">
+          <div class="card card-body">
+            <table class="table table-striped">
+              <tbody>
+                <tr *ngFor="let item of repoArray">
+                  <td>{{ item.full_name }}</td>
+                  <td>{{ item.language }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- pager -->
+      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+          <a (click)="setPage(1)">First</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+          <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+        </li>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+          <a (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+          <a (click)="setPage(pager.currentPage + 1)">Next</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+          <a (click)="setPage(pager.totalPages)">Last</a>
+        </li>
+      </ul>
+      <div *ngIf="searchDataArray.length === 0" class="card bg-light data-list-view">
+        <div class="card-body">
+          Search
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <router-outlet></router-outlet> -->
